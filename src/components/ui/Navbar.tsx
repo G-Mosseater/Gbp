@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ModeToggle } from "./ModeToggle";
+import { ModeToggle } from "../ModeToggle";
 
 const navigationItems = [
   { name: "Home", href: "/" },
@@ -61,6 +61,7 @@ export default function Navbar() {
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="md:hidden">
               <Menu className="h-5 w-5" />
+
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
@@ -73,14 +74,14 @@ export default function Navbar() {
                 </Link>
               </SheetTitle>
             </SheetHeader>
-            <div className="mt-6">
-              <nav className="flex flex-col space-y-4 items-center">
+            <div className="mt-12 ">
+              <nav className="flex flex-col space-y-8 items-center">
                 {navigationItems.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
                     onClick={() => setActiveTab(item.name)}
-                    className={`text-lg font-medium transition-colors hover:text-primary ${
+                    className={`text-3xl font-medium transition-colors hover:text-primary ${
                       activeTab === item.name
                         ? "text-primary"
                         : "text-muted-foreground"
@@ -89,6 +90,7 @@ export default function Navbar() {
                     {item.name}
                   </Link>
                 ))}
+                <ModeToggle />
               </nav>
             </div>
           </SheetContent>
