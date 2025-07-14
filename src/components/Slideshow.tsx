@@ -19,7 +19,6 @@ const Slideshow = () => {
 
   return (
     <>
-      <div>
         <Image
           src={images[index]}
           alt="Slider image"
@@ -30,7 +29,6 @@ const Slideshow = () => {
           priority
           sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
         />
-      </div>
     </>
   );
 };

@@ -1,12 +1,15 @@
-const fetchInstagramData = async () => {
-  const response = await fetch("/api/instagram", {
+const fetchInstagramData = async (next?: string) => {
+  const url = next
+    ? `/api/instagram?next=${encodeURIComponent(next)}`
+    : "/api/instagram";
+
+  const response = await fetch(url, {
     method: "GET",
   });
-     if (!response.ok) {
-      throw new Error("Failed to fetch Instagram Data")
-   } 
-   return await response.json()
+  if (!response.ok) {
+    throw new Error("Failed to fetch Instagram Data");
+  }
+  return await response.json();
 };
 
-
-export default fetchInstagramData
+export default fetchInstagramData;
