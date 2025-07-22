@@ -34,8 +34,8 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <ul>
+    <div className="min-h-screen p-4">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {media.map((item) => {
           const hasChildren =
             item.media_type === "CAROUSEL_ALBUM" &&
@@ -43,75 +43,77 @@ const UserProfile = () => {
             item.children?.data.length > 0;
 
           return (
-            <li key={item.id} className="relative w-[400px] h-64 mb-12">
+            <li key={item.id} className="flex flex-col w-full h-full">
               {hasChildren ? (
                 <Carousel className="w-full h-full">
                   <CarouselContent>
                     {item.children?.data.map((childItem) => (
                       <CarouselItem key={childItem.id}>
-                        <div className="relative w-full h-64">
+                        <div className="relative  h-[500px] w-full overflow-hidden ">
                           {childItem.media_type === "VIDEO" ? (
                             <video
                               src={childItem.media_url}
                               muted
                               loop
                               controls
-                              className="object-cover rounded-lg w-full h-full"
+                              className="object-contain  mx-auto h-full w-auto"
                             />
                           ) : (
                             <Image
                               src={childItem.media_url}
                               alt={item.caption || "Instagram carousel image"}
                               fill
-                              className="object-cover rounded-lg"
-                              priority={false}
+                              className="h-full w-auto object-contain mx-auto  "
                               loading="lazy"
-                              sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                             />
                           )}
                         </div>
                       </CarouselItem>
                     ))}
                   </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
+                  <CarouselPrevious className="absolute top-1/2 left-2 -translate-y-1/2 z-10" />
+                  <CarouselNext className="absolute top-1/2 right-2 -translate-y-1/2 z-10" />
                 </Carousel>
               ) : item.media_type === "VIDEO" ? (
-                <video
-                  src={item.media_url}
-                  autoPlay
-                  muted
-                  loop
-                  controls
-                  className="object-cover rounded-lg w-full h-full"
-                />
+                <div className="relative w-full h-[500px]">
+                  <video
+                    src={item.media_url}
+                    autoPlay
+                    muted
+                    loop
+                    controls
+                    className="object-contain w-full h-full  "
+                  />
+                </div>
               ) : (
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-[500px]">
                   <Image
                     src={item.media_url}
                     alt={item.caption || "Instagram media"}
                     fill
-                    className="object-cover rounded-lg"
+                    className="h-full w-auto object-contain mx-auto "
                     loading="lazy"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                   />
+                  
                 </div>
               )}
 
-              <p className="mt-2">{item.caption}</p>
+              <p >{item.caption}</p>
               <small>{new Date(item.timestamp).toLocaleString()}</small>
             </li>
           );
         })}
       </ul>
       {paging?.next && (
-        <Button
-          onClick={() => loadMedia(paging.next)}
-          disabled={loading}
-          className="px-4 py-2  text-white rounded"
-        >
-          {loading ? "Loading..." : "Load More"}
-        </Button>
+        <div className="flex justify-center mt-8">
+          <Button
+            onClick={() => loadMedia(paging.next)}
+            disabled={loading}
+            className="px-4 py-2 text-white rounded"
+          >
+            {loading ? "Loading..." : "Load More"}
+          </Button>
+        </div>
       )}
     </div>
   );
