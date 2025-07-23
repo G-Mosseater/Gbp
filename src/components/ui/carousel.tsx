@@ -182,7 +182,7 @@ function CarouselPrevious({
   const startAutoNext = () => {
     slideIntervalRef.current = setInterval(() => {
       scrollPrev();
-    }, 1500);
+    }, 1000);
   };
   const stopScroll = () => {
     if (slideIntervalRef.current) {
@@ -226,7 +226,7 @@ function CarouselNext({
   const startAutoNext = () => {
     slideIntervalRef.current = setInterval(() => {
       scrollNext();
-    }, 1500);
+    }, 1000);
   };
   const stopScroll = () => {
     if (slideIntervalRef.current) {

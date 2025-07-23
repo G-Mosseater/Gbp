@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { useState } from "react";
-
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -20,7 +21,7 @@ const navigationItems = [
 ];
 
 export default function Navbar() {
-  const [activeTab, setActiveTab] = useState("Home");
+  const pathname = usePathname();
 
   return (
     <header
@@ -35,7 +36,14 @@ export default function Navbar() {
       <div className=" flex h-16 items-center w-full justify-between p-2 md:p-8 ">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-sm bg-primary" />
+           <Image
+    src="/Logo.jpg"          //
+    alt="Logo"
+
+    width={42}              
+    height={52}
+    className="rounded-sm "
+  />
             <span className="font-bold text-lg">Gabriel</span>
           </Link>
         </div>
@@ -45,9 +53,8 @@ export default function Navbar() {
             <Link
               key={item.name}
               href={item.href}
-              onClick={() => setActiveTab(item.name)}
               className={`text-lg font-medium transition-colors hover:text-primary ${
-                activeTab === item.name
+                pathname === item.href
                   ? "text-primary border-b-2 border-primary pb-1"
                   : "text-muted-foreground"
               }`}
@@ -80,9 +87,8 @@ export default function Navbar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    onClick={() => setActiveTab(item.name)}
                     className={`text-3xl font-medium transition-colors hover:text-primary ${
-                      activeTab === item.name
+                      pathname === item.href
                         ? "text-primary"
                         : "text-muted-foreground"
                     }`}

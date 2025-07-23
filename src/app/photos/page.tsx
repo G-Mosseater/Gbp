@@ -1,122 +1,77 @@
-"use client";
+"use client"
 
-import { MediaItem } from "@/entities/mediaTypes";
-import fetchInstagramData from "@/services/fetchInstagramData";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Button } from "@/components/ui/button";
+import type { MediaItem } from "@/entities/mediaTypes"
+import fetchInstagramData from "@/services/fetchInstagramData"
+import { useEffect, useState } from "react"
+import { Button } from "@/components/ui/button"
+import MediaCard from "@/components/MediaCard"
+import { Loader2 } from "lucide-react"
+
 const UserProfile = () => {
-  const [media, setMedia] = useState<MediaItem[]>([]);
-  const [paging, setPaging] = useState<{ next?: string } | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [media, setMedia] = useState<MediaItem[]>([])
+  const [paging, setPaging] = useState<{ next?: string } | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [initialLoading, setInitialLoading] = useState(true)
 
   const loadMedia = async (nextUrl?: string) => {
-    setLoading(true);
+    setLoading(true)
     try {
-      const res = await fetchInstagramData(nextUrl);
-      setMedia((prev) => [...prev, ...res.media]);
-      setPaging(res.paging || null);
+      const res = await fetchInstagramData(nextUrl)
+      setMedia((prev) => [...prev, ...res.media])
+      setPaging(res.paging || null)
     } catch (error) {
-      console.error(error);
+      console.error("Failed to load photos:", error)
+    } finally {
+      setLoading(false)
+      setInitialLoading(false)
     }
-    setLoading(false);
-  };
+  }
 
   useEffect(() => {
-    loadMedia();
-  }, []);
+    loadMedia()
+  }, [])
+
+  if (initialLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="flex items-center gap-2">
+          <Loader2 className="w-6 h-6 animate-spin" />
+          <span>Loading my instagram photos...</span>
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <div className="min-h-screen p-4">
-      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {media.map((item) => {
-          const hasChildren =
-            item.media_type === "CAROUSEL_ALBUM" &&
-            item.children &&
-            item.children?.data.length > 0;
+    <div className="min-h-screen p-4 max-w-7xl mx-auto">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">Media Gallery</h1>
+  
+      </div>
 
-          return (
-            <li key={item.id} className="flex flex-col w-full h-full">
-              {hasChildren ? (
-                <Carousel className="w-full h-full">
-                  <CarouselContent>
-                    {item.children?.data.map((childItem) => (
-                      <CarouselItem key={childItem.id}>
-                        <div className="relative  h-[500px] w-full overflow-hidden ">
-                          {childItem.media_type === "VIDEO" ? (
-                            <video
-                              src={childItem.media_url}
-                              muted
-                              loop
-                              controls
-                              className="object-contain  mx-auto h-full w-auto"
-                            />
-                          ) : (
-                            <Image
-                              src={childItem.media_url}
-                              alt={item.caption || "Instagram carousel image"}
-                              fill
-                              className="h-full w-auto object-contain mx-auto  "
-                              loading="lazy"
-                            />
-                          )}
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious className="absolute top-1/2 left-2 -translate-y-1/2 z-10" />
-                  <CarouselNext className="absolute top-1/2 right-2 -translate-y-1/2 z-10" />
-                </Carousel>
-              ) : item.media_type === "VIDEO" ? (
-                <div className="relative w-full h-[500px]">
-                  <video
-                    src={item.media_url}
-                    autoPlay
-                    muted
-                    loop
-                    controls
-                    className="object-contain w-full h-full  "
-                  />
-                </div>
-              ) : (
-                <div className="relative w-full h-[500px]">
-                  <Image
-                    src={item.media_url}
-                    alt={item.caption || "Instagram media"}
-                    fill
-                    className="h-full w-auto object-contain mx-auto "
-                    loading="lazy"
-                  />
-                  
-                </div>
-              )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+        {media.map((item) => (
+          <MediaCard key={item.id} item={item} className="hover:scale-[1.02] transition-transform duration-200" />
+        ))}
+      </div>
 
-              <p >{item.caption}</p>
-              <small>{new Date(item.timestamp).toLocaleString()}</small>
-            </li>
-          );
-        })}
-      </ul>
       {paging?.next && (
-        <div className="flex justify-center mt-8">
-          <Button
-            onClick={() => loadMedia(paging.next)}
-            disabled={loading}
-            className="px-4 py-2 text-white rounded"
-          >
-            {loading ? "Loading..." : "Load More"}
+        <div className="flex justify-center mt-12">
+          <Button onClick={() => loadMedia(paging.next)} disabled={loading} size="lg" className="px-8 py-3">
+            {loading ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Loading...
+              </>
+            ) : (
+              "Load More"
+            )}
           </Button>
         </div>
       )}
-    </div>
-  );
-};
 
-export default UserProfile;
+    </div>
+  )
+}
+
+export default UserProfile
