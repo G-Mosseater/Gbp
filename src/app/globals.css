@@ -41,8 +41,26 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --glass-border-color: rgba(255, 255, 255, 0.2);
+  --glass-bg-light: rgba(255, 255, 255, 0.3);
+  --glass-bg-dark: rgba(17, 24, 39, 0.3); 
+  --glass-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
+.glass {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: var(--glass-border-color);
 
+  background-color: var(--glass-bg-light);
+
+  box-shadow: var(--glass-shadow);
+
+  backdrop-filter: blur(12px);
+}
+.dark .glass {
+  background-color: var(--glass-bg-dark);
+}
 .dark {
   --background-primary: rgba(18, 18, 18, 1);
   --background-secondary: rgba(249, 250, 251, 1);

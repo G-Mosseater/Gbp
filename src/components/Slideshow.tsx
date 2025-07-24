@@ -22,8 +22,9 @@ const Slideshow = () => {
       <Image
         src={images[index]}
         alt="Slider image"
-        fill
-        className={`object-cover	 transition-opacity duration-1500 ease-in ${
+        width={800}
+    height={600}
+        className={`object-cover rounded-sm	 transition-opacity duration-1500 ease-in ${
           fade ? "opacity-100" : "opacity-0"
         }`}
         priority

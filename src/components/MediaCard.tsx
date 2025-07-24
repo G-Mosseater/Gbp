@@ -20,6 +20,7 @@ interface MediaCardProps {
 export default function MediaCard({ item, className = "" }: MediaCardProps) {
   const hasChildren = item.media_type === "CAROUSEL_ALBUM" && item.children;
 
+  //Convert instagram timestamp into a readable date
   const formatDate = (timestamp: string) => {
     return new Date(timestamp).toLocaleDateString("en-UK", {
       year: "numeric",
@@ -31,6 +32,7 @@ export default function MediaCard({ item, className = "" }: MediaCardProps) {
   };
 
   const renderMedia = () => {
+    // If instagram array is a carousel:
     if (hasChildren) {
       return (
         <div className="relative w-full h-[400px] overflow-hidden rounded-t-lg bg-red">
@@ -39,6 +41,7 @@ export default function MediaCard({ item, className = "" }: MediaCardProps) {
               {item.children?.data.map((childItem) => (
                 <CarouselItem key={childItem.id}>
                   <div className="relative w-full h-[400px] flex items-center justify-center ">
+                    {/* If item is a video: */}
                     {childItem.media_type === "VIDEO" ? (
                       <div className="relative w-full h-full group">
                         <video
@@ -50,6 +53,7 @@ export default function MediaCard({ item, className = "" }: MediaCardProps) {
                         />
                       </div>
                     ) : (
+                      // If it is image
                       <Image
                         src={childItem.media_url}
                         alt="Instagram photo"
@@ -62,31 +66,25 @@ export default function MediaCard({ item, className = "" }: MediaCardProps) {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute top-1/2 left-4 -translate-y-1/2 z-10" />
-            <CarouselNext className="absolute top-1/2 right-4 -translate-y-1/2 z-10" />
+            <CarouselPrevious className="hidden md:block md:absolute md:top-1/2 md:left-4 md:-translate-y-1/2 md:z-10" />
+            <CarouselNext className="hidden md:absolute md:block md:top-1/2 md:right-4 md:-translate-y-1/2 md:z-10" />
           </Carousel>
-          {/* Carousel indicator */}
+          {/* Carousel bullets */}
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1 z-10">
             {item.children?.data.map((_, index) => (
               <div
                 key={index}
-                className="w-2 h-2 rounded-full 
-             border border-white/20 
-             bg-white/30 dark:bg-gray-900/30 
-             backdrop-blur-md 
-             supports-[backdrop-filter]:bg-white/30 
-             supports-[backdrop-filter]:dark:bg-gray-900/30 
-             shadow-md"
+                className="w-2 h-2 rounded-full bg-white/60 backdrop-blur-sm"
               />
             ))}
           </div>
         </div>
       );
     }
-
+    // If it is a video"
     if (item.media_type === "VIDEO") {
       return (
-        <div className="relative w-full h-[400px] overflow-hidden rounded-t-lg group">
+        <div className="relative w-full h-[500px] overflow-hidden rounded-t-lg group">
           <video
             src={item.media_url}
             autoPlay
@@ -99,7 +97,7 @@ export default function MediaCard({ item, className = "" }: MediaCardProps) {
         </div>
       );
     }
-
+    // If it's a image:
     return (
       <div className="relative w-full h-[500px] overflow-hidden rounded-t-lg ">
         <Image
@@ -114,18 +112,10 @@ export default function MediaCard({ item, className = "" }: MediaCardProps) {
   };
 
   return (
-    <Card
-      className={`w-full overflow-hidden 
-  border border-white/20 
-  bg-white/30 dark:bg-gray-900/30 
-  backdrop-blur-md 
-  supports-[backdrop-filter]:bg-white/30 
-  supports-[backdrop-filter]:dark:bg-gray-900/30 
-  shadow-md hover:shadow-lg transition-shadow 
-  ${className}`}
-    >
+    <Card className={`w-full overflow-hidden glass${className}`}>
+      {/* Render whatever is inside renderMedia */}
       <CardContent className="p-0">{renderMedia()}</CardContent>
-
+      {/* If the media item has a caption or timestamp then: */}
       {(item.caption || item.timestamp) && (
         <CardFooter className="flex flex-col gap-2">
           {item.caption && (

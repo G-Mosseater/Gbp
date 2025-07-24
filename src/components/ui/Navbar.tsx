@@ -27,23 +27,19 @@ export default function Navbar() {
     <header
       className="
     sticky top-0 z-50 w-full
-    border-b border-white/20
-    bg-white/30 dark:bg-gray-900/30
-    backdrop-blur-md supports-[backdrop-filter]:bg-white/30 supports-[backdrop-filter]:dark:bg-gray-900/30
-    shadow-md
+   glass
   "
     >
       <div className=" flex h-16 items-center w-full justify-between p-2 md:p-8 ">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-           <Image
-    src="/Logo.jpg"          //
-    alt="Logo"
-
-    width={42}              
-    height={52}
-    className="rounded-sm "
-  />
+            <Image
+              src="/Logo.jpg" //
+              alt="Logo"
+              width={42}
+              height={52}
+              className="rounded-sm "
+            />
             <span className="font-bold text-lg">Gabriel</span>
           </Link>
         </div>
@@ -72,12 +68,17 @@ export default function Navbar() {
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px]">
+          <SheetContent side="right" className="w-full glass">
             <SheetHeader>
               <SheetTitle>
                 <Link href="/" className="flex items-center space-x-2">
-                  <div className="h-6 w-6 rounded-sm bg-primary" />
-                  <span className="font-bold">My Portfolio</span>
+   <Image
+              src="/Logo.jpg" //
+              alt="Logo"
+              width={42}
+              height={42}
+              className="rounded-sm "
+            />                  <span className="font-bold">Gabriel</span>
                 </Link>
               </SheetTitle>
             </SheetHeader>

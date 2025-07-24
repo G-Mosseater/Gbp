@@ -63,7 +63,7 @@ export default function Hero({
           </div>
 
           {/* Image */}
-          <div className="relative overflow-hidden rounded-lg h-[80vh] lg:w-full">
+          <div className="relative flex items-center justify-center overflow-hidden h-[40vh] md:h-[60vh] rounded-sm lg:h-[80vh] w-full">
             <Slideshow />
           </div>
         </div>
