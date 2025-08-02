@@ -22,6 +22,7 @@ const navigationItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header
@@ -60,7 +61,7 @@ export default function Navbar() {
           ))}{" "}
           <ModeToggle />
         </nav>
-        <Sheet>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="md:hidden">
               <Menu className="h-5 w-5" />
@@ -72,13 +73,14 @@ export default function Navbar() {
             <SheetHeader>
               <SheetTitle>
                 <Link href="/" className="flex items-center space-x-2">
-   <Image
-              src="/Logo.jpg" //
-              alt="Logo"
-              width={42}
-              height={42}
-              className="rounded-sm "
-            />                  <span className="font-bold">Gabriel</span>
+                  <Image
+                    src="/Logo.jpg" //
+                    alt="Logo"
+                    width={42}
+                    height={42}
+                    className="rounded-sm "
+                  />{" "}
+                  <span className="font-bold">Gabriel</span>
                 </Link>
               </SheetTitle>
             </SheetHeader>
@@ -86,6 +88,7 @@ export default function Navbar() {
               <nav className="flex flex-col space-y-8 items-center">
                 {navigationItems.map((item) => (
                   <Link
+                    onClick={() => setIsOpen(false)}
                     key={item.name}
                     href={item.href}
                     className={`text-3xl font-medium transition-colors hover:text-primary ${

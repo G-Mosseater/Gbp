@@ -17,7 +17,7 @@ interface MediaCardProps {
   className?: string;
 }
 
-export default function MediaCard({ item, className = "" }: MediaCardProps) {
+export default function MediaCard({ item}: MediaCardProps) {
   const hasChildren = item.media_type === "CAROUSEL_ALBUM" && item.children;
 
   //Convert instagram timestamp into a readable date
@@ -35,7 +35,7 @@ export default function MediaCard({ item, className = "" }: MediaCardProps) {
     // If instagram array is a carousel:
     if (hasChildren) {
       return (
-        <div className="relative w-full h-[400px] overflow-hidden rounded-t-lg bg-red">
+        <div className="relative w-full h-[400px] overflow-hidden rounded-t-lg ">
           <Carousel className="w-full h-full">
             <CarouselContent>
               {item.children?.data.map((childItem) => (
@@ -112,7 +112,10 @@ export default function MediaCard({ item, className = "" }: MediaCardProps) {
   };
 
   return (
-    <Card className={`w-full overflow-hidden glass${className}`}>
+    <Card
+      className={`w-full overflow-hidden glass $
+    hover:scale-[1.02] transition-transform duration-300 ease-in-out hover:shadow-lg`}
+    >
       {/* Render whatever is inside renderMedia */}
       <CardContent className="p-0">{renderMedia()}</CardContent>
       {/* If the media item has a caption or timestamp then: */}
