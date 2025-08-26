@@ -7,14 +7,11 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-background border-t border-border">
       <div className="px-4 sm:px-6 lg:px-8 py-8">
-        {/* Top section */}
         <div className="flex justify-between items-center">
-          {/* Text on the left */}
           <h3 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Gabriel
           </h3>
 
-          {/* Icons on the right */}
           <div className="flex gap-4">
             <Link
               href="https://www.linkedin.com/in/gabriel-burlacu-30bb60277"
@@ -43,7 +40,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom section */}
         <div className="w-full border-t border-border pt-6 mt-6">
           <p className="text-sm text-muted-foreground">
             All rights reserved {currentYear}
