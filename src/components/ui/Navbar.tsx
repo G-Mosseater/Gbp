@@ -41,7 +41,7 @@ export default function Navbar() {
               height={52}
               className="rounded-sm "
             />
-            <span className="font-bold text-lg">Gbr</span>
+            <span className="font-bold text-lg">Senior Bug Summoner 🐜</span>
           </Link>
         </div>
 

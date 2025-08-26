@@ -15,37 +15,42 @@ interface HeroProps {
   showImage?: boolean;
   noPadding?: boolean;
   showBadges?: boolean;
+  showSubtitle?: boolean;
 }
 
 export default function Hero({
   title = "Gabriel",
-  subtitle = "Junior Web Developer / Senior Bug Summoner 🐜",
-  description = "This page is my personal space to practice coding and share future projects. I'm trying out glasmorphism because it looks cool and futuristic.",
+  subtitle = "Junior Web Developer ",
+  description = "This is my personal space to practice coding and showcase upcoming projects. I'm experimenting with glassmorphism for a modern, futuristic look. Please note, this page is still in development, so you may encounter some bugs",
   badges = ["React", "Next.js", "TypeScript", "Figma", "SQL", "TailwindCSS"],
   ctaText = "View my projects",
   ctaHref = "/projects",
   secondaryCtaText = "Contact Me",
   secondaryCtaHref = "/",
   showImage = true,
-  noPadding = false,
   showBadges = true,
+  showSubtitle = true,
 }: HeroProps) {
   return (
     <section className={`relative overflow-hidden bg-background `}>
-      <div className="flex flex-col md:flex-row items-center justify-between gap-8 px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-8 sm:px-6 lg:px-8">
         <div className="flex-1 flex flex-col justify-center space-y-6 ">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
             {title}
           </h1>
-          <p className="text-xl text-muted-foreground sm:text-2xl">
-            {subtitle}
-          </p>
+
+          {showSubtitle && (
+            <p className="text-xl text-muted-foreground sm:text-2xl">
+              {subtitle}
+            </p>
+          )}
+
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto md:mx-0">
             {description}
           </p>
 
           {showBadges && (
-            <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+            <div className="flex flex-wrap gap-3 justify-start ">
               {badges.map((badge, index) => (
                 <Badge key={index} variant="secondary" className="text-sm">
                   {badge}

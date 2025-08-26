@@ -25,11 +25,12 @@ const UserProfile = () => {
     <div className="flex flex-col py-8 lg:py-24">
       <Hero
         title="Gabriel's Instagram Photos"
-        description="Here you’ll find some of my latest Instagram photos — they’re pulled in automatically using Instagram’s API, so this gallery always stays fresh with my newest photos without me having to update it manually!"
+        description="Check out my Instagram photos! This gallery updates automatically via Instagram's API whenever I share something new."
         ctaText="See My Projects"
         showImage={false}
         noPadding={true}
         showBadges={false}
+        showSubtitle={false}
       />
 
       <div className="max-w-7xl mx-auto mt-16 px-4 sm:px-6 lg:px-8">
