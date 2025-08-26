@@ -23,3 +23,18 @@ export type User = {
     data: MediaItem[];
   };
 };
+
+
+export type GitHubRepos = {
+  id: number;
+  name: string;
+  full_name: string;
+  html_url: string;
+  description: string | null;
+  private: boolean;
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  created_at: string;
+  updated_at: string;
+}

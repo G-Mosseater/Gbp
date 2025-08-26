@@ -197,7 +197,7 @@ function CarouselPrevious({
       variant="glass"
       size="xs"
       className={cn(
-        "absolute  rounded-full",
+        "absolute  rounded-full" ,
 
         orientation === "horizontal"
           ? "top-1/2 -left-12 -translate-y-1/2"
