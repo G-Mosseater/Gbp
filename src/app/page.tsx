@@ -2,7 +2,9 @@ import Hero from "@/components/ui/Hero";
 export default function Home() {
   return (
     <>
-      <Hero />
+      <div className="py-8">
+        <Hero />
+      </div>
     </>
   );
 }

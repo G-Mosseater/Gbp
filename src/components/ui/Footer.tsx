@@ -2,8 +2,7 @@ import Link from "next/link";
 import { Github, Linkedin, Instagram } from "lucide-react";
 
 export default function Footer() {
-
-      const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative overflow-hidden bg-background border-t border-border">
@@ -15,7 +14,7 @@ export default function Footer() {
 
           <div className="flex gap-4">
             <Link
-              href="https://linkedin.com"
+              href="www.linkedin.com/in/gabriel-burlacu-30bb60277"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -23,7 +22,7 @@ export default function Footer() {
               <Linkedin className="h-6 w-6" />
             </Link>
             <Link
-              href="https://instagram.com"
+              href="https://www.instagram.com/gabonization/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -31,7 +30,7 @@ export default function Footer() {
               <Instagram className="h-6 w-6" />
             </Link>
             <Link
-              href="https://github.com"
+              href="https://github.com/G-Mosseater"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"

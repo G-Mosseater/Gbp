@@ -3,13 +3,17 @@ const fetchInstagramData = async (next?: string) => {
     ? `/api/instagram?next=${encodeURIComponent(next)}`
     : "/api/instagram";
 
-  const response = await fetch(url, {
-    method: "GET",
-  });
+  const response = await fetch(url, { method: "GET" });
   if (!response.ok) {
     throw new Error("Failed to fetch Instagram Data");
   }
-  return await response.json();
+
+  const data = await response.json();
+
+  return {
+    media: data.media || [],
+    paging: data.paging || null,
+  };
 };
 
 export default fetchInstagramData;

@@ -26,15 +26,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+  <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
-          <div className="py-16 sm:py-22 lg:py-8 sm:px-4"> {children}</div>
+<main className="flex-1 flex flex-col justify-center px-4">
+            {children}
+          </main>
           <Footer />
-        </ThemeProvider>{" "}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -13,7 +13,7 @@ export const useInstagramMedia = () => {
     if (!nextUrl) setInitialLoading(true);
     try {
       const res = await fetchInstagramData(nextUrl);
-      setMedia((prev) => [...prev, ...res.media]);
+      setMedia((prev) => [...prev, ...(res.media || [])]);
       setPaging(res.paging || null);
     } catch (error) {
       console.error("Failed to load photos:", error);

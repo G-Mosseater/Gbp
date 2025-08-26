@@ -24,7 +24,6 @@ export type User = {
   };
 };
 
-
 export type GitHubRepos = {
   id: number;
   name: string;
@@ -37,4 +36,4 @@ export type GitHubRepos = {
   forks_count: number;
   created_at: string;
   updated_at: string;
-}
+};

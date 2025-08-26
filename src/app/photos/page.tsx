@@ -7,7 +7,6 @@ import MediaGrid from "@/components/MediaGrid";
 import { useInstagramMedia } from "@/services/useInstagramMedia";
 
 const UserProfile = () => {
- 
   const { media, paging, loading, initialLoading, loadMedia } =
     useInstagramMedia();
 
@@ -16,14 +15,14 @@ const UserProfile = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="flex items-center gap-2">
           <Loader2 className="w-6 h-6 animate-spin" />
-          <span>Loading my instagram photos...</span>
+          <span>Loading my Instagram photos...</span>
         </div>
       </div>
     );
   }
-  
+
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col py-8 lg:py-24">
       <Hero
         title="Gabriel's Instagram Photos"
         description="Here you’ll find some of my latest Instagram photos — they’re pulled in automatically using Instagram’s API, so this gallery always stays fresh with my newest photos without me having to update it manually!"
@@ -33,7 +32,7 @@ const UserProfile = () => {
         showBadges={false}
       />
 
-      <div className="min-h-screen max-w-7xl mx-auto mt-16">
+      <div className="max-w-7xl mx-auto mt-16 px-4 sm:px-6 lg:px-8">
         <MediaGrid media={media} />
 
         {paging?.next && (
