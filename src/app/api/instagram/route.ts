@@ -2,7 +2,7 @@ import { MediaItem } from "@/entities/mediaTypes";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const accessToken = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
+  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
 
   // const apiUrl = `https://graph.instagram.com/v23.0/me?fields=id,username,profile_picture_url,media{caption,media_type,media_url,permalink,timestamp}&access_token=${accessToken}`;
 
